@@ -1,5 +1,6 @@
 
-//tarea enviar [MOD3] Evaluacion Rodrigo Montalva lunes
+//tarea enviar [MOD3] Evaluacion Rodrigo Montalva lunes 24
+
 
 package appxml;
 
@@ -12,7 +13,7 @@ public class AppXML {
         // TODO code application logic here
         Verificador v = new Verificador();
         v.verificaXML("c:\\java\\entrada.txt");
-        
+         //v.verificaXML("c:\\java\\entrada.txt");
     }
     
 }

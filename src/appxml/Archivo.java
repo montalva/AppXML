@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class Archivo implements Labeler  {
     String path;
     File file;
-    public int i=0;
-    String [] linea;
+    private int i=0;
+    private String [] linea;
     String aux;
     public String[] leer(String url){
         linea = new String[100];
@@ -26,13 +26,18 @@ public class Archivo implements Labeler  {
         }
         while (entrada.hasNext()) {            
             aux = entrada.nextLine();
+            linea[i]="";
             for (int j = 0; j < aux.length(); j++) {
                 if (aux.charAt(j) == '<' || aux.charAt(j) == '>') {
-                    linea[i] = String.valueOf(aux.charAt(j));
-                    i++;
+                    linea[i] = linea[i]+String.valueOf(aux.charAt(j));   
+                } 
+                if(j==aux.length()-1 && !linea[i].isEmpty()){
+                   i++;
+                } else if(j==aux.length()-1 && linea[i].isEmpty()){
+                   i--;
                 }
             }
-             
+                         
         }
         return linea;
         
