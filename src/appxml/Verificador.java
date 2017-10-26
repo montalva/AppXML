@@ -24,10 +24,10 @@ public class Verificador {
                      String aux = p.pop();
                      System.out.println("quitar de la pila: "+aux);
                      if (datos[i][j].substring(1, datos[i][j].length()).equals(aux)){
-                         System.out.println("linea xml correcta");
+                         System.out.println("linea xml correcta: "+datos[i][j].substring(1, datos[i][j].length())+"="+aux);
                      }
                      else{
-                         System.out.println("linea xml incorrecta: " +aux+" != "+ datos[i][j].substring(1, datos[i][j].length()));
+                         System.err.println("linea xml incorrecta: " +aux+" != "+ datos[i][j].substring(1, datos[i][j].length()));
                      }
                  }else{
                      
