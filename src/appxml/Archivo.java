@@ -12,10 +12,12 @@ public class Archivo implements Labeler  {
     String path;
     File file;
     private int i=0;
-    private String [] linea;
+    private String [][] linea;
+
     String aux;
-    public String[] leer(String url){
-        linea = new String[100];
+    public String[][] leer(String url){
+        linea = new String[100][100];
+     
         this.path = url;
         file = new File(this.path);
         Scanner entrada=null;
@@ -23,27 +25,46 @@ public class Archivo implements Labeler  {
             entrada = new Scanner(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        while (entrada.hasNext()) {
+            aux = entrada.nextLine();            
+            linea[i]= splitXML(aux);
+            for (int j = 0; j < linea[i].length; j++) {
+                System.out.println("" + j + " : " + linea[i][j]);   
+            }  
+            i++;
+             
         }
-        while (entrada.hasNext()) {            
-            aux = entrada.nextLine();
-            linea[i]="";
-            for (int j = 0; j < aux.length(); j++) {
-                if (aux.charAt(j) == '<' || aux.charAt(j) == '>') {
-                    linea[i] = linea[i]+String.valueOf(aux.charAt(j));   
-                } 
-                if(j==aux.length()-1 && !linea[i].isEmpty()){
-                   i++;
-                } else if(j==aux.length()-1 && linea[i].isEmpty()){
-                   i--;
-                }
-            }
-                         
-        }
-        return linea;
-        
+        return linea;       
     }
+    
     public int regresaI(){
         // regresa el indice total
         return i;
+    }
+    
+    public static String[] splitXML(String str) {
+        String[] vec = new String[100];
+        int j = 0, i = 0;
+        while (i < str.length()) {
+            if (str.charAt(i) == '<') {
+                i++;
+                vec[j] = "";
+                while (str.charAt(i) != '>') {
+                    vec[j] += str.charAt(i);
+                    i++;
+                }
+                j++;
+            } else {
+                i++;
+            }
+        }
+        String[] r = new String[j];
+        for (int k = 0;
+                k < j;
+                k++) {
+            r[k] = vec[k];
+        }
+        return r;
     }
 }
